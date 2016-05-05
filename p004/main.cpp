@@ -19,7 +19,7 @@ bool isPalindromic(int n) {
            return false;
     }
     return true;
-p}
+}
 
 /*
 A struct that can be constructed with two positive integers, a and b. Each time
