@@ -4,7 +4,10 @@
 
 using namespace std;
 
-
+/*
+Calculates each fibonacci sequence and determines if it is even. 
+If even, it adds it to the sum
+*/
 long fibonacciSum(long n) {
     long a = 1;
     long b = 2;
@@ -23,6 +26,10 @@ long fibonacciSum(long n) {
     return sum;
 }
 
+/*
+Every third fibonacci number is even, so this simplifies the algorithm 
+to only calculate and add every third number.
+*/
 long fibonacciSumOptimized(long n) {
     long a = 1;
     long b = 2;
