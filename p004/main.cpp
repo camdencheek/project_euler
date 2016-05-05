@@ -19,7 +19,7 @@ bool isPalindromic(int n) {
            return false;
     }
     return true;
-}
+p}
 
 /*
 A struct that can be constructed with two positive integers, a and b. Each time
@@ -33,26 +33,38 @@ struct ProductGeneratorHighToLow {
     vector< vector<int> > poss;
 
     ProductGeneratorHighToLow(int a, int b) : a(a),b(b) {
-        vector<int> arr {a,b};
+        int high = max(a,b);
+        int low = min(a,b);
+        vector<int> arr {high,low};
         poss.push_back(arr);
     }
 
     int getNext() {
-        if (poss.back()[1] == poss.back()[0] - 2) {
-            vector<int> arr {poss.back()[0]-1,poss.back()[0]-1};
+
+
+        while (poss.back()[1] < poss.back()[0] - 1) {
+            vector<int> arr {poss.back()[0]-1,poss.back()[1]};
             poss.push_back(arr);
         }
+
         int max = -1;
-        int max_index = -1;
+        vector<int> max_indices;
         for (int i = 0; i < poss.size(); i++) {
             int prod = poss[i][0]*poss[i][1];
             if (prod > max) {
                 max = prod;
-                max_index = i;
+                max_indices = {i};
+            } else if (prod == max ) {
+                max_indices.push_back(i);
             }
+
         }
 
-        poss[max_index] = vector<int> {poss[max_index][0],poss[max_index][1]-1};
+        for (int i: max_indices) {
+            poss[i] = vector<int> {poss[i][0],poss[i][1]-1};
+        }
+
+
 
         return max;
     }
