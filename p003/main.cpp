@@ -2,6 +2,9 @@
 
 using namespace std;
 
+/*
+Returns the smallest factor of number n
+*/
 long smallestFactor(long n) {
     int i = 2;
     while (true) {
@@ -19,6 +22,9 @@ int main() {
 
     while (true) {
         long sm = smallestFactor(n);
+	//if the smallest factor of a number is itself, it is a prime number
+	//Since all the smaller factors have already been divided out, this is the
+	//largest prime factor of n
         if (sm == n) {
             cout << "Largest prime factor: " << sm;
             return 0;
