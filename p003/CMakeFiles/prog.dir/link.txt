@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/prog.dir/p003.cpp.o  -o prog 

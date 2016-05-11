@@ -1,0 +1,3 @@
+/home/ccheek/projects/project_euler/p003/CMakeFiles/rebuild_cache.dir
+/home/ccheek/projects/project_euler/p003/CMakeFiles/edit_cache.dir
+/home/ccheek/projects/project_euler/p003/CMakeFiles/prog.dir

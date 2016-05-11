@@ -26,7 +26,7 @@ int main() {
     //Since all the smaller factors have already been divided out, this is the
     //largest prime factor of n
     if (sm == n) {
-      cout << "Largest prime factor: " << sm;
+      cout << "Largest prime factor: " << sm << endl; 
       return 0;
     } else {
       n /= smallestFactor(n);
