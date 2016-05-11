@@ -77,8 +77,8 @@ int main() {
     while (true) {
         int next_highest = gen.getNext();
         if (isPalindromic(next_highest)){
-            cout << "Highest Palindromic: " << next_highest;
-            break;
+	    cout << "Highest Palindromic: " << next_highest << endl;
+	    break;
         }
     }
 
