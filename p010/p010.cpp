@@ -42,8 +42,8 @@ int main() {
   int i = 1;
 
   Primes my_primes;
-  int max = 2;
-  int sum = 0;
+  int max = 2000000;
+  long sum = 0;
   while (my_primes.get_nth(i) < max) {
     sum += my_primes.get_nth(i);
     i++;
