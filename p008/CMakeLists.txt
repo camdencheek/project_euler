@@ -1,0 +1,5 @@
+cmake_minimum_required ( VERSION 3.5.2 )
+project ( p008 )
+set ( CMAKE_CXX_FLAGS "-lgmp" )
+add_executable ( prog p008.cpp )
+target_compile_features(prog PRIVATE cxx_range_for)
