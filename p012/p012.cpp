@@ -33,15 +33,21 @@ set<long> factors(long n) {
 
 int main() {
   int num_factors = 0;
-  int i = 2;
-  long curr;
-  while ( num_factors <= 500 ) {
-    curr = nth_triangular(i);
-    set<long> factor_set = factors(curr);
-    num_factors = factor_set.size();
-    cout << curr << ": " << num_factors << endl;
-    i++;
+//  int i = 2;
+//  long curr;
+//  while ( num_factors <= 500 ) {
+//    curr = nth_triangular(i);
+//    set<long> factor_set = factors(curr);
+//    num_factors = factor_set.size();
+//    cout << curr << ": " << num_factors << endl;
+//    i++;
+//  }
+//  cout << "Solution: " << curr << endl;
+
+  auto factor_set = factors(28);
+  for(auto iter=factor_set.begin(); iter!=factor_set.end();++iter) {
+    cout << *iter << endl;
   }
-  cout << "Solution: " << curr << endl;
+
   return 0;
 }

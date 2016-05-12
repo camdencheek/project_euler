@@ -29,7 +29,7 @@ int main() {
       cout << "Largest prime factor: " << sm << endl; 
       return 0;
     } else {
-      n /= smallestFactor(n);
+      n /= sm;
     }
   }
 }
