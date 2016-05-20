@@ -19,15 +19,15 @@ protected:
     prime_list.push_back(biggest);
   }
 
-  void factors_recursive(vector<int> &factors, unordered_map<int,int> &prime_factors,
+  void factors_recursive(int &sum, unordered_map<int,int> &prime_factors,
                          unordered_map<int,int>::iterator it, int curr) {
     if (it == prime_factors.end()) {
-      factors.push_back(curr);
+      sum += curr;
       return;
     } else {
       for(int i = 0; i <= it->second; i++) {
         auto it2 = it;
-        factors_recursive(factors,prime_factors,++it2,curr*pow(it->first,i));
+        factors_recursive(sum,prime_factors,++it2,curr*pow(it->first,i));
       }
     }
   }
@@ -78,37 +78,29 @@ public:
     return factor_list;
   }
 
-  vector<int> proper_divisors(int n) {
+  int sum_proper_divisors(int n) {
     auto p_factors = prime_factors(n);
-    vector<int> factors;
+    int sum = 0;
     auto it = p_factors.begin();
     int curr = 1;
-    factors_recursive(factors,p_factors,it,curr);
-    factors.pop_back();
-    return factors;
+    factors_recursive(sum,p_factors,it,curr);
+    sum -= n;
+    return sum;
   }
 };
 
-int vec_sum(vector<int> &vec) {
-  int sum = 0;
-  for (auto i: vec) {
-    sum += i;
+int is_amicable(int n, Primes &p) {
+  int fac_sum1 = p.sum_proper_divisors(n);
+  if ( fac_sum1 <= n ) {
+    return 0;
   }
-  return sum;
-}
 
-bool is_amicable(int n, Primes &p) {
-  auto a = p.proper_divisors(n);
-  int fac_sum1 = vec_sum(a);
-  auto b = p.proper_divisors(fac_sum1);
-  int fac_sum2 = vec_sum(b);
-  
 
-  if (fac_sum2 == n && fac_sum1 != fac_sum2) {
-    return true;
-  } else {
-    return false;
+  int fac_sum2 = p.sum_proper_divisors(fac_sum1);
+  if (fac_sum2 == n) {
+    return n + fac_sum1;
   }
+  return 0;
 }
 
 int main() {
@@ -116,12 +108,9 @@ int main() {
   boost::timer t;
   Primes p;
 
-  int sum = 0;
-  for (int i = 2; i < 1000000;i++ ) {
-    cout << i << endl;
-    if (is_amicable(i,p)) {
-      sum += i;
-    }
+  long sum = 0;
+  for (int i = 2; i < 100000;i++ ) {
+    sum += is_amicable(i,p);
   }
   cout << sum << endl;
   cout << t.elapsed() << endl;
