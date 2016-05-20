@@ -1,0 +1,5 @@
+cmake_minimum_required ( VERSION 3.5.1 )
+project ( p021 )
+add_executable ( prog p021.cpp )
+target_compile_features(prog PRIVATE cxx_range_for)
+set( CXX_FLAGS "-Wall" )
