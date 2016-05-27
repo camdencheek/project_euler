@@ -16,3 +16,6 @@ int main() {
   } while (mpz_sizeinbase(a,10) < 1000);
   cout << i << endl << t.elapsed() << endl;
 }
+
+
+
