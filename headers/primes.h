@@ -9,8 +9,47 @@
 
 struct Primes {
 
+private:
   std::vector<bool *> ptrs;
   unsigned long max;
+
+  void proper_divisors_recursive(set<int> &divisors, unordered_map<int,int> &prime_factors,
+                                 unordered_map<int,int>::iterator it,int curr) {
+    if (it == prime_factors.end()) {
+      divisors.insert(curr);
+      return;
+    } else {
+      for (int i = 0; i <= it->second; i++) {
+        auto it2 = it;
+        proper_divisors_recursive(divisors,prime_factors,++it2,int(curr*pow(it->first,i)));
+      }
+    }
+
+  }
+
+  void append_next_block() {
+
+    unsigned long sqrt_max = (unsigned long) std::sqrt(max + 1000000) + 1;
+    bool* block = new bool[1000000];
+    ptrs.push_back(block);
+    std::fill(block,block+1000000,true);
+
+    for (unsigned long i = 2; i <= sqrt_max; i++) {
+      if (!is_prime(i)) {
+        continue;
+      }
+      unsigned long j = 1+((max-1)/i);
+      unsigned long jmax = (max+1000000)/i;
+      for (; j <= jmax; j++) {
+        block[i*j%1000000] = false;
+      }
+    }
+
+    max += 1000000;
+
+  }
+
+public:
 
   Primes() {
     bool* block = new bool[1000000];
@@ -42,28 +81,6 @@ struct Primes {
     }
     auto blk_ptr = ptrs[n/1000000];
     return blk_ptr[n%1000000];
-  }
-
-  void append_next_block() {
-
-    unsigned long sqrt_max = (unsigned long) std::sqrt(max + 1000000) + 1;
-    bool* block = new bool[1000000];
-    ptrs.push_back(block);
-    std::fill(block,block+1000000,true);
-
-    for (unsigned long i = 2; i <= sqrt_max; i++) {
-      if (!is_prime(i)) {
-        continue;
-      }
-      unsigned long j = 1+((max-1)/i);
-      unsigned long jmax = (max+1000000)/i;
-      for (; j <= jmax; j++) {
-        block[i*j%1000000] = false;
-      }
-    }
-
-    max += 1000000;
-
   }
 
   unsigned long get_nth(unsigned long n) {
@@ -100,6 +117,20 @@ struct Primes {
     }
     return res;
   };
+
+  set<int> proper_divisors(int n) {
+
+    auto p_factors = prime_factors(n);
+    set<int> divisors;
+
+    auto it = p_factors.begin();
+    int curr = 1;
+
+    proper_divisors_recursive(divisors,p_factors,it,curr);
+    divisors.erase(n);
+
+    return divisors;
+  }
 };
 
 #endif
