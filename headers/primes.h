@@ -90,7 +90,7 @@ struct Primes {
 		unsigned long get_nth(unsigned long n) {
 			assert(n > 0);
 			if (n <= max_n) {
-				return primes_list[n + 1];
+				return primes_list[n - 1];
 			}
 			long long i = max_i + 1;
 			unsigned long m = n - max_n;
