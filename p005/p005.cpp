@@ -1,34 +1,22 @@
 #include <iostream>
 #include <map>
+#include "../headers/primes.h"
+#include <boost/timer.hpp>
 
 using namespace std;
 
-map<int,int> primeFactors(int n) {
-    int curr = 2;
-    map<int,int> factors;
-
-    while (curr <= n) {
-        if (n % curr == 0) {
-            factors[curr] += 1;
-            n /= curr;
-        } else {
-            curr += 1;
-        }
-    }
-
-    return factors;
-};
-
 int main() {
-
-    int max = 1000;
+	
+	boost::timer t;	
+	Primes p;
+    int max = 20;
 
     map<int,int> factors;
 
     for (int i = 1; i <= max; i++) {
-        auto curr_factors = primeFactors(i);
+        auto curr_factors = p.prime_factors(i);
 
-        for (map<int,int>::iterator it = curr_factors.begin(); it != curr_factors.end();
+        for (map<long,int>::iterator it = curr_factors.begin(); it != curr_factors.end();
              ++it) {
             if (factors[it->first] < it->second){
                 factors[it->first] = it->second;
@@ -43,7 +31,8 @@ int main() {
         }
     }
 
-    cout << product;
+    cout << product << endl;
+	cout << t.elapsed()*1000 << "ms" << endl;
 
     return 0;
 }
