@@ -1,0 +1,1 @@
+/usr/bin/clang++   -Wall -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/prog.dir/p030.cpp.o  -o prog 
