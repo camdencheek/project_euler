@@ -3,6 +3,8 @@
 #include <cmath>
 #include <limits>
 #include <map>
+#include <set>
+#include <unordered_map>
 
 #ifndef PRIMES_HEADER
 #define PRIMES_HEADER
@@ -13,8 +15,8 @@ private:
   std::vector<bool *> ptrs;
   unsigned long max;
 
-  void proper_divisors_recursive(set<int> &divisors, unordered_map<int,int> &prime_factors,
-                                 unordered_map<int,int>::iterator it,int curr) {
+  void proper_divisors_recursive(std::set<int> &divisors, std::map<long,int> &prime_factors,
+                                 std::map<long,int>::iterator it,int curr) {
     if (it == prime_factors.end()) {
       divisors.insert(curr);
       return;
@@ -112,16 +114,18 @@ public:
           res[tmp]++;
         }
         n /= tmp;
+        i = 1;
+        continue;
       }
       i++;
     }
     return res;
   };
 
-  set<int> proper_divisors(int n) {
+  std::set<int> proper_divisors(int n) {
 
     auto p_factors = prime_factors(n);
-    set<int> divisors;
+    std::set<int> divisors;
 
     auto it = p_factors.begin();
     int curr = 1;
