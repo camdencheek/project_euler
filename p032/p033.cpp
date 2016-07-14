@@ -13,7 +13,7 @@ void print_set(set<int> a) {
 }
 
 bool is_pandigital_with_multiplicands(int n) {
-	vector<int> n_digits = cam::digits(n);
+	deque<int> n_digits = cam::digits(n);
 	set<int> remaining_digits;
 
 	for (int i = 1; i <= 9; i++) {
@@ -41,7 +41,7 @@ bool is_pandigital_with_multiplicands(int n) {
 		int b = n / a;
 		if ( n % a == 0 ) {
 
-			vector<int> a_digits = cam::digits(a);
+			deque<int> a_digits = cam::digits(a);
 			for (int digit: a_digits) {
 				if (digit == 0 ||  !local_remaining_digits.count(digit) ) {
 					next = true;
@@ -51,7 +51,7 @@ bool is_pandigital_with_multiplicands(int n) {
 				local_remaining_digits.erase(digit);
 			}
 			
-			vector<int> b_digits = cam::digits(b);
+			deque<int> b_digits = cam::digits(b);
 			for (int digit: cam::digits(b)) {
 				if (digit == 0 || !local_remaining_digits.count(digit) ) {
 					next = true;

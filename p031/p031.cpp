@@ -18,7 +18,7 @@ int make_change(int n,int index) {
 		}	
 		isdefined = true;
 	}
-	
+
 	int sum = 0;
 	if (memo[n][index]) {
 		return memo[n][index];
@@ -37,13 +37,13 @@ int make_change(int n,int index) {
 	return sum;
 }
 
-int main(int argc,const char *argv[]) {
-	
-	boost::timer t;
 
+int main(int argc,const char *argv[]) {
+
+	boost::timer t;
 	int amount = 200;
+	
 	cout << make_change(amount,0) << endl;
 	cout << t.elapsed()*1000 << "ms" << endl;
-	
 
 }
