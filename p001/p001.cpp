@@ -17,7 +17,7 @@ This is the least efficient, but simplest method presented.
 unsigned long solutionBruteForce(unsigned long num) {
 
     unsigned long sum = 0;
-    for (long i = 1; i < num; i++) {
+    for (unsigned long i = 1; i < num; i++) {
         if (i % 5 == 0 || i % 3 == 0)
             sum += i;
     }
@@ -36,7 +36,7 @@ unsigned long solutionMultiples(unsigned long num) {
     unsigned long max_mult_15 = (num - 1) / 15;
     unsigned long sum = 0;
 
-    for (long i = 1; i <= max_mult_3; i++) {
+    for (unsigned long i = 1; i <= max_mult_3; i++) {
         sum += i*3;
         if (i <= max_mult_5)
             sum += i*5;
@@ -56,8 +56,9 @@ unsigned long solutionArithmetic(unsigned long num) {
     unsigned long max_mult_3 = (num - 1) / 3;
     unsigned long max_mult_15 = (num - 1) / 15;
 
-    unsigned long sum = ((max_mult_3*3)*(max_mult_3 + 1) + (max_mult_5*5)*(max_mult_5+1) -
-                                          (max_mult_15*15)*(max_mult_15+1))/2;
+    unsigned long sum = ((max_mult_3*3)*(max_mult_3 + 1) + 
+						 (max_mult_5*5)*(max_mult_5+1) -
+                         (max_mult_15*15)*(max_mult_15+1)) / 2;
 
     return sum;
 }
@@ -67,10 +68,12 @@ int main() {
 
     unsigned long test_nums[] = {10,1000,100000,1000000};
 
-    for (int i = 0; i < sizeof(test_nums)/sizeof(long); i++) {
+    for (unsigned long i = 0; i < sizeof(test_nums)/sizeof(long); i++) {
         boost::timer t_brute_force;
         unsigned long brute_force_solution = solutionBruteForce(test_nums[i]);
         double brute_force_time = t_brute_force.elapsed();
+
+		
 
         boost::timer t_multiples;
         unsigned long multiples_solution = solutionMultiples(test_nums[i]);
